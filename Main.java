@@ -6,11 +6,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-     Groupe grp1 = new Groupe(1,5);
-     grp1.creerGroupe();
-     //grp1.afficherList();
-     TdTp temp = new TdTp(grp1);
-
 
     }
 }

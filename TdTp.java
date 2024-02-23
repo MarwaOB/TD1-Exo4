@@ -7,12 +7,16 @@ import java.util.Map;
 
 
 
+
 public class TdTp {
-    private Groupe Grp;
+   
     private LocalDate date;
     private LocalTime time;
+    private int nbNiv ;
+    private int nombregroupe ;
 
-    private String module;
+
+   
     private Map<Etudiant, Integer> listAbs = new HashMap<>();
 
     public static LocalDate getRandomDate(LocalDate startDate, LocalDate endDate) {
@@ -30,8 +34,8 @@ public class TdTp {
         long randomSeconds = startSeconds + random.nextInt((int) (endSeconds - startSeconds));
         return LocalTime.ofSecondOfDay(randomSeconds);
     }
-    public TdTp(Groupe grp) {
-        this.Grp = grp ;
+    public TdTp( int nNiv , int nombregroupe) {
+     
 
         LocalDate startDate = LocalDate.of(2023, 9, 21);
         LocalDate endDate = LocalDate.of(2024, 6, 30);
@@ -40,26 +44,15 @@ public class TdTp {
         LocalTime startTime = LocalTime.of(8, 30, 0);
         LocalTime endTime = LocalTime.of(17, 00, 00);
         this.time = getRandomTime(startTime, endTime);
+        Groupe e = Scolarite.TAB[nNiv].groupes[nombregroupe]; 
 
-        grp.getNiv().afficherModules();
-        System.out.println("Choisir un module: ");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        System.out.println("test apres choix success ");
-        this.module = grp.getNiv().getModule()[choice-1];
-
-        //Remplir la liste des absc
-        for(int i=0; i< grp.getMax(); i++) {
-            System.out.println("Is the etudiant: "+grp.getEtudiants()[i].getNom()+grp.getEtudiants()[i].getPrenom() + " absent ? : yes/no");
-            String abs = scanner.next();
-            if(abs.equals("yes")) {
-                grp.getEtudiants()[i].setCptAbs(grp.getEtudiants()[i].getCptAbs()+1);
-                listAbs.put(grp.getEtudiants()[i], 1);
-            } else {
-                listAbs.put(grp.getEtudiants()[i], 0);
-            }
+        for ( int i= 0 ; i< e.getMax();  i ++){
+            Random random = new Random();
+            listAbs.put(   e.Etudiants[i],  random.nextInt(2));
+         
         }
 
-        scanner.close();
+     
+      
     }
 }
